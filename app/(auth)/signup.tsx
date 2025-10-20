@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ActivityIndicator, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ActivityIndicator, KeyboardAvoidingView, Platform, ScrollView, ImageBackground } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { useAuth } from '@/contexts/AuthContext';
 import { theme } from '@/constants/theme';
@@ -34,11 +35,20 @@ export default function SignupScreen() {
   };
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    <ImageBackground
+      source={require('@/assets/images/istockphoto-1379019632-612x612 copy.jpg')}
+      style={styles.backgroundContainer}
+      imageStyle={styles.backgroundImage}
     >
-      <ScrollView contentContainerStyle={styles.scrollContent}>
+      <LinearGradient
+        colors={['rgba(240, 249, 255, 0.95)', 'rgba(224, 242, 254, 0.95)', 'rgba(255, 255, 255, 0.95)']}
+        style={styles.gradientOverlay}
+      >
+        <KeyboardAvoidingView
+          style={styles.container}
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        >
+          <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.header}>
           <Text style={styles.title}>Create Account</Text>
           <Text style={styles.subtitle}>Join WatchnLearn today</Text>
@@ -141,15 +151,25 @@ export default function SignupScreen() {
             </TouchableOpacity>
           </View>
         </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+          </ScrollView>
+        </KeyboardAvoidingView>
+      </LinearGradient>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
+  backgroundContainer: {
+    flex: 1,
+  },
+  backgroundImage: {
+    opacity: 0.03,
+  },
+  gradientOverlay: {
+    flex: 1,
+  },
   container: {
     flex: 1,
-    backgroundColor: theme.colors.background,
   },
   scrollContent: {
     flexGrow: 1,

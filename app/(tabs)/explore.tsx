@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, ActivityIndicator, TextInput } from 'react-native';
+import { View, Text, StyleSheet, FlatList, ActivityIndicator, TextInput, ImageBackground } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { Search } from 'lucide-react-native';
 import { supabase } from '@/lib/supabase';
@@ -149,8 +150,16 @@ export default function ExploreScreen() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
+    <ImageBackground
+      source={require('@/assets/images/istockphoto-1379019632-612x612 copy.jpg')}
+      style={styles.backgroundContainer}
+      imageStyle={styles.backgroundImage}
+    >
+      <LinearGradient
+        colors={['rgba(240, 249, 255, 0.95)', 'rgba(224, 242, 254, 0.95)', 'rgba(255, 255, 255, 0.95)']}
+        style={styles.gradientOverlay}
+      >
+        <View style={styles.header}>
         <Text style={styles.title}>Explore Subjects</Text>
         <Text style={styles.subtitle}>Discover and enroll in new subjects</Text>
 
@@ -181,27 +190,32 @@ export default function ExploreScreen() {
         )}
         contentContainerStyle={styles.listContent}
       />
-    </View>
+      </LinearGradient>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  backgroundContainer: {
     flex: 1,
-    backgroundColor: theme.colors.secondary,
+  },
+  backgroundImage: {
+    opacity: 0.03,
+  },
+  gradientOverlay: {
+    flex: 1,
   },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: theme.colors.secondary,
   },
   header: {
-    backgroundColor: theme.colors.white,
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
     padding: theme.spacing.lg,
     paddingTop: theme.spacing.xxl,
-    borderBottomWidth: 1,
-    borderBottomColor: theme.colors.border,
+    borderBottomWidth: 0,
+    backdropFilter: 'blur(10px)',
   },
   title: {
     fontSize: theme.fontSize.xxl,
