@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   backgroundImage: {
-    opacity: 0.03,
+    opacity: 0.15,
   },
   gradientOverlay: {
     flex: 1,
